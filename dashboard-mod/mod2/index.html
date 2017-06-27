@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<script src = "http://d3js.org/d3.v3.min.js"></script>
+		<script src="http://iop.io/js/iopctrl.js"></script>
+		<style>
+			.ok {
+				fill: red;
+				opacity: 0.8;
+			}
+
+			.warning {
+				fill: yellow;
+				opacity: 0.8;
+			}
+			
+			.fault {
+				fill: green;
+				opacity: 0.8;
+			}
+			
+			body {
+				font: 16px arial;
+			}
+
+			.unselectable {
+				-moz-user-select: -moz-none;
+				-khtml-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			/* css formats for the gauge */
+			.gauge .domain {
+				stroke-width: 2px;
+				stroke: #8B8B83;
+			}
+
+			.gauge .tick line {
+				stroke: #8B8B83;
+				stroke-width: 2px;
+			}
+			
+			.gauge line {
+				stroke: #8B8B83;
+			}
+
+			.gauge .arc, .gauge .cursor {
+				opacity: 0;
+			}
+
+			.gauge .major {
+				fill: #8B8B83;
+				font-size: 10px;
+				font-family: 'Play', verdana, sans-serif;
+				font-weight: normal;
+			}
+			
+			.gauge .indicator {
+				stroke: #EE3311;
+				fill: #000;
+				stroke-width: 4px;
+			}
+
+			/* css formats for the segment display */
+			.segdisplay .on {
+				fill: #00FFFF;
+
+			}
+
+			.segdisplay .off {
+				fill: #00FFFF;
+				opacity: 0.15;
+			}
+		</style>
+	</head>	
+	<body>
+	    <form>
+		sales:<input type = "number" min = "0"  id = "Sales" style="width:80;"/>
+		target:<input type = "number" min = "0"  id = "Target" style="width:80;"/>
+		<button type="button" onclick="getTheData()">Click Me!</button>
+		</form>
+		<div id = "dashboard">
+		</div>
+		<script src = "dashboard.js"></script>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<script src = "http://d3js.org/d3.v3.min.js"></script>
+		<style>
+			body {
+				font: 16px arial;
+				font-weight : normal;
+			}
+
+			.unselectable {
+				-moz-user-select: -moz-none;
+				-khtml-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			#compare{
+				width : 600;
+				height: 200;
+				position: relative;
+			}
+			body{
+				text-align:center;
+				
+			}
+			
+			#compare{
+				margin:0 auto;
+			}
+			
+			#fp{
+				position: absolute;
+			}
+			
+			#sp{
+				position: absolute;
+				left: 400;
+		</style>
+	</head>	
+	<body>
+		<form>
+			
+			expensesR:<input type = "number" min = "0"  id = "expensesR" style="width:80;"/>
+			expensesP:<input type = "number" min = "0"  id = "expensesP" style="width:80;"/>
+		    <button type="button" onclick="getTheData()">Click Me!</button>
+		</form>
+		<div id = "compare">
+			<div id = "fp">
+			</div>
+			<div id = "sp">
+			</div>
+		</div>
+		<script src = "compare.js"></script>
+	</body>
+</html>

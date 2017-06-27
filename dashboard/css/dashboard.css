@@ -1,0 +1,172 @@
+body{
+	text-align:center;
+	background-color:#D1D1D1;
+}
+#bg{
+	position: relative;
+	width: 1060;
+	height: 630;
+	background-color:#D1D1D1;
+	margin:0 auto
+}
+#lt  {
+	background-color:white;
+	position: absolute;
+    left: 530px;
+    top: 310px;
+	width: 300;
+	height: 290;
+}
+
+#lt  {	
+	position: absolute;
+    left: 20px;
+    top: 20px;
+	width: 400;
+	height: 290;
+}
+
+#mt, #rt, #mb, #rb{
+	background-color:white;
+	position: absolute;
+	width: 300;
+	height: 290;
+}
+
+#mt {
+    left: 430px;
+    top: 20px;
+}
+
+#rt {
+    left: 740px;
+    top: 20px;
+}
+
+#mb {
+    left: 430px;
+    top: 320px;
+}
+
+
+#rb  {
+    left: 740px;
+    top: 320px;
+}
+
+#lbl1, #lbl2, #lbl3{
+	background-color:white;
+	position: absolute;
+	width: 290;
+	height: 90;
+}
+
+#lbl1{
+	left: 20px;
+    top: 320px;
+}
+
+#lbl2{
+	left: 20px;
+    top: 420px;
+}
+
+#lbl3{
+	left: 20px;
+    top: 520px;
+}
+
+#lbr1, #lbr2, #lbr3{
+	background-color:white;
+	position: absolute;
+	width: 100;
+	height: 90;
+}
+
+#lbr1{
+	left: 320px;
+    top: 320px;
+}
+
+#lbr2{
+	left: 320px;
+    top: 420px;
+}
+
+#lbr3{
+	left: 320px;
+    top: 520px;
+}
+
+
+
+		.ok {
+            fill: red;
+            opacity: 0.8;
+        }
+
+        .warning {
+            fill: yellow;
+            opacity: 0.8;
+        }
+		
+		.fault {
+            fill: green;
+            opacity: 0.8;
+        }
+		
+		body {
+            font: 16px arial;
+        }
+
+        .unselectable {
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* css formats for the gauge */
+        .gauge .domain {
+            stroke-width: 2px;
+            stroke: #8B8B83;
+        }
+
+        .gauge .tick line {
+            stroke: #8B8B83;
+            stroke-width: 2px;
+        }
+        
+        .gauge line {
+            stroke: #8B8B83;
+        }
+
+        .gauge .arc, .gauge .cursor {
+            opacity: 0;
+        }
+
+        .gauge .major {
+            fill: #8B8B83;
+            font-size: 10px;
+            font-family: 'Play', verdana, sans-serif;
+            font-weight: normal;
+        }
+        
+        .gauge .indicator {
+            stroke: #EE3311;
+            fill: #000;
+            stroke-width: 4px;
+        }
+
+        /* css formats for the segment display */
+        .segdisplay .on {
+            fill: #00FFFF;
+
+        }
+
+        .segdisplay .off {
+            fill: #00FFFF;
+            opacity: 0.15;
+        }
+        }
