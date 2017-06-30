@@ -1,0 +1,97 @@
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+#background {
+	position : relative;
+	
+}
+
+#svg {
+    position : absolute;
+	top : 0;
+	left : 0;
+
+}
+
+#in {
+	position : relative;
+	top: 20px;
+	left : 1000px;
+	width: 200px;
+    background : red;	
+}
+.txt {
+	font-size:60px;
+}
+
+
+#rangein {
+   position : absolute;
+   top: 50px;
+}
+
+#rangeIn{
+   width: 190px;
+   
+   text-align:center;
+   -webkit-appearance: none; /* 隐藏滑块，以便自定义滑块样式 */   
+   -webkit-appearance: none; 
+   outline: none; /* 去掉默认蓝色边框 */       
+   cursor: pointer;   
+   background: transparent; /* 隐藏滑块，以便自定义滑块样式 */  
+   border-color: transpare 	  
+}
+
+#numberin{
+    position : absolute;
+	left: 10px;
+	top: 10px;
+}
+
+#numberIn{
+   width: 120px;
+   height: 25px;
+   text-align:left;
+   -moz-appearance:textfield;
+   border-radius:5px;
+   border-color : black;
+}
+
+#but {
+	position : absolute;
+	top: 10px;
+	left : 150px;
+}
+#button{
+    width: 50px;
+	height: 28px;
+	border-radius:5px;
+	background : white;
+	border-color : black;
+}
+
+
+
+      
+
+
+
+
+
