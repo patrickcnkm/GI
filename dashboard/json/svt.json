@@ -1,0 +1,35 @@
+{
+	"name":"data",
+	"children":
+	[{
+		"name":"Sales",
+		"children":
+		[
+			{"name":"A","size":"4000970"},
+			{"name":"B","size":"1647102"},
+			{"name":"C","size":"7760521"},
+			{"name":"D","size":"11247074"},
+			{"name":"E","size":"10045655"}
+		]
+	},
+	{
+		"name":"Target",
+		"children":
+		[
+			{"name":"A","size":"8640214"},
+			{"name":"B","size":"1489809"},
+			{"name":"C","size":"6219475"},
+			{"name":"D","size":"14471291"},
+			{"name":"E","size":"9890327"}
+		]
+	},
+	{
+		"name":"Expenses",
+		"children":
+		[
+			{"name":"real","size":"48987709"},
+			{"name":"projection","size":"42899780"}
+		]
+	}
+	]
+}

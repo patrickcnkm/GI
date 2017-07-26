@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<script src = "http://d3js.org/d3.v3.min.js"></script>
+		<style>
+			body {
+				font: 16px arial;
+				font-weight : normal;
+			}
+
+			.unselectable {
+				-moz-user-select: -moz-none;
+				-khtml-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+		</style>
+	</head>	
+	<body>
+		<form>
+		totalRealSales:<input type = "number" min = "0"  id = "totalRealSales" style="width:80;"/>
+		totalTargetSales:<input type = "number" min = "0"  id = "totalTargetSales" style="width:80;"/>
+		<button type="button" onclick="getTheData()">Click Me!</button>
+		</form>
+
+		<div id = "compare">
+		</div>
+		<script src = "compare.js"></script>
+	</body>
+</html>
