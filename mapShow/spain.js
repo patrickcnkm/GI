@@ -1,5 +1,5 @@
-var width = 960;
-var height = 600;
+var width = 1200;
+var height = 800;
 var centered;
 var projection = d3.geo.mercator()
   .center([-1,40])
@@ -21,8 +21,10 @@ svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
     .attr("height", height)
-    .on("click", clicked);
-    
+    .on("click", clickedout)
+	.on('mouseover',outb);
+var root;	
+var georoot; 
 var groups = svg.append('g');
 var countArray = [];
 d3.json('Spain.json', function(error,root) {
@@ -30,7 +32,7 @@ d3.json('Spain.json', function(error,root) {
     return  console.error(error);
   console.log(root);
   
-  var georoot = topojson.feature(root,root.objects.Spain);
+  georoot = topojson.feature(root,root.objects.Spain);
   console.log(georoot);  
  
   var regionGroup = [];
@@ -65,16 +67,15 @@ d3.json('Spain.json', function(error,root) {
     let name = georoot.features[i].properties.name;
     georoot.features[i].name = name;
   }
-  
+  /*
   countArray = [0,0,0,0,0,0,0]; 
-  
+  */
   for(let i in georoot.features) {
     if(georoot.features[i].properties.name === 'Las Palmas') {georoot.features.splice(i,1);}
     if(georoot.features[i].properties.name === 'Santa Cruz de Tenerife') {georoot.features.splice(i,1);}
     if(georoot.features[i].properties.name === 'Ceuta') {georoot.features.splice(i,1);}
   }
   
-  console.log(georoot.features);
   groups//.attr('id','states')
     .selectAll('path')
     .data(georoot.features)
@@ -84,22 +85,162 @@ d3.json('Spain.json', function(error,root) {
     .style('fill',function(d,i) {
       return color(d.color) 
     })
-    .on('click',clicked);
-    
+    .style('cursor','pointer')
+    .on('click',clicked)
+	.on('mouseover',over);
+  /*  
   groups.append("path")
       .datum(topojson.mesh(root, root.objects.Spain, function(a, b) { return a !== b; }))
       .attr("id", "state-borders")
-      .attr("d", path);
-  
+      .attr("d", path)
+      .on('mouseover',over);
+  */
 });
+let j =0;
+let z = 0;
+function clickedout(d) {
+d3.selectAll('path').remove();
+	
+    groups.selectAll('path')
+    .data(georoot.features)
+    .enter()
+    .append('path')
 
+    .attr('d', path)
+    .style('fill',function(d,i) {
+	  if(!d.color) {++z;}
+      return color(d.color); 
+    })
+    .style('cursor','pointer')
+    .on('click',clicked)
+	.on('mouseover',over);
 
+ 
+  groups.transition()
+      .duration(750)
+      .attr("transform", "translate(" + 0 + "," + 0 + ")scale(" + 1 + ")")
+      .style("stroke-width", 1 + "px");
+}
 
 function clicked(d) {
+  d3.selectAll('path').remove();
+  let features = [];
+  for(let i in georoot.features) {
+	if(georoot.features[i].color == d.color) {
+	  features.push(georoot.features[i]);
+	}	
+  }
+  
+  groups.selectAll('path')
+    .data(features)
+    .enter()
+    .append('path')
+    .attr('d', path)
+    .style('fill',function(d,i) {
+      return color(d.color) 
+    })
+    //.on('click',clicked)
+	.on('mouseover',overin);
+	
+	
+  var x, y, k;
+
+  if (d && centered !== d || countArray[d.color - 1] <= 2) {
+    var centroid = path.centroid(d);
+    x = centroid[0];
+    y = centroid[1];
+    k = 1.5;
+    centered = d;
+  }
+  else{
+    x = width / 2;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+
+ 
+  groups.transition()
+      .duration(750)
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+      .style("stroke-width", 1.5 / k + "px");
+}
+
+function over(d) {
+  let color = d.color
+  groups.selectAll("path")
+    .style("opacity", '0.1');
+  
+  groups.selectAll("path")
+    .filter(function(d){return (d.color === color)})
+    .style("opacity", '1');
+	
+  let moveX = d3.mouse(this)[0];
+  let moveY = d3.mouse(this)[1];
+  d3.selectAll('.myrect').remove();
+  d3.selectAll('.showinrect').remove();
+  svg.append('rect')
+    .attr('width','100')
+	.attr('height','30')
+	.attr('fill','pink')
+	.attr('class','myrect')
+	.attr('x',moveX + 50)
+	.attr('y',moveY + 20);
+  svg.append('text')
+    .attr('x',moveX + 100)
+	.attr('y',moveY + 40)
+	.style('text-anchor','middle')
+	.attr('class','showinrect')
+	.text(d.color);   
+}
+
+function overin(d) {
+  let name = d.name;
+  groups.selectAll("path")
+    .style("opacity", '0.1');
+  
+  groups.selectAll("path")
+    .filter(function(d){return (d.name === name)})
+    .style("opacity", '1');
+	
+  let moveX = d3.mouse(this)[0];
+  let moveY = d3.mouse(this)[1];
+  d3.selectAll('.myrect').remove();
+  d3.selectAll('.showinrect').remove();
+  svg.append('rect')
+    .attr('width','100')
+	.attr('height','30')
+	.attr('fill','pink')
+	.attr('class','myrect')
+	.attr('x',moveX + 50)
+	.attr('y',moveY + 20);
+  svg.append('text')
+    .attr('x',moveX + 100)
+	.attr('y',moveY + 40)
+	.style('text-anchor','middle')
+	.attr('class','showinrect')
+	.text(d.name);   
+}
+
+
+function out(d) {
+  d3.selectAll('.myrect').remove();
+  d3.selectAll('.showinrect').remove();
+
+}
+  
+function outb(d) {
+  d3.selectAll('.myrect').remove();
+  d3.selectAll('.showinrect').remove();
+  console.log(1);	
+  groups.selectAll("path")
+    .style("opacity", '1');
+}
+/*
   let hereName = '';
   let hereRegion = '';
   if(d) {
-    if(d.hasOwnProperty('properties')){hereName = d.properties.name;  hereRegion = d.properties.region; console.log(d.properties.name);/*console.log(d.properties.provnum_ne)*/};
+    if(d.hasOwnProperty('properties')){hereName = d.properties.name;  hereRegion = d.properties.region; console.log(d.properties.name);console.log(d.properties.provnum_ne)};
   }
   if(!d) {
     groups.selectAll("path")
@@ -113,10 +254,7 @@ function clicked(d) {
   groups.selectAll("path")
     .filter(function(d){return (d.color !== color)})
     .style("opacity", '0.1');
-    
-  
-    
-  
+     
   countArray[d.color - 1] += 1;
     console.log(countArray);
     
@@ -137,7 +275,7 @@ function clicked(d) {
 
   
   let title;
-  if(centered !== d && countArray[d.color - 1] === 1) {
+  if( !== d && countArray[d.color - 1] === 1) {
     title = svg.append('text')
       .attr('font-size','25px')
       .attr('class','proname')
@@ -172,16 +310,15 @@ function clicked(d) {
     d3.selectAll('.proname').remove();
       groups.selectAll("path")
       .style("opacity", '1');
+
   }
 
-  /*
+ 
   groups.transition()
       .duration(750)
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
       .style("stroke-width", 1.5 / k + "px");
-  */
-}
-  
+ */ 
 
 
 
