@@ -42,7 +42,14 @@ var subsvg = d3.select('body')
   .attr('width',70)
   .attr('height',height);
   
-
+svg.append("rect")
+    .attr("class", "background")
+    .attr("width", width)
+    .attr("height", height)
+    //.on("click", clickedout)
+    .style('fill','none')
+	.on('mouseover',outb)
+    .call(zoom);
     
 subsvg.append("rect")
     .attr("class", "background")
@@ -89,15 +96,6 @@ let k = 1;
 var root;
 var georoot; 
 var groups = svg.append('g');
-svg.append("rect")
-    .attr("class", "background")
-    .attr("width", width)
-    .attr("height", height)
-    //.on("click", clickedout)
-    .style('fill','none')
-	.on('mouseover',outb)
-    .call(zoom)
-    .style('point-events','none');
 var countArray = [];
 d3.json('Spain.json', function(error,root) {
   if(error)
@@ -184,7 +182,6 @@ projection.translate([width/2,height/2]);
     .data(georoot.features)
     .enter()
     .append('path')
-
     .attr('d', path)
     .style('fill',function(d,i) {
 	  if(!d.color) {++z;}
@@ -193,6 +190,7 @@ projection.translate([width/2,height/2]);
     .style('cursor','pointer')
     .on('click',clicked)
 	.on('mouseover',over);
+    //.call(zoom);
 
  
   groups.transition()
@@ -225,7 +223,9 @@ function clicked(d) {
       return color(d.color) 
     })
     //.on('click',clicked)
-	.on('mouseover',overin);
+	.on('mouseover',overin)
+    .call(zoom);
+
 	
 	
   var x, y;
@@ -355,7 +355,8 @@ function clickedbig(s) {
   initScale *= 1.2
 
   projection.scale(initScale);
-  show.attr('d',path);
+  show.attr('d',path)
+  .call(zoom);
   
 }
 
@@ -363,7 +364,8 @@ function clickedsmall() {
   initScale /= 1.2
 
   projection.scale(initScale);
-  show.attr('d',path);
+  show.attr('d',path)
+  .call(zoom);
   
 }
 
